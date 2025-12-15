@@ -36,7 +36,16 @@
     #    - Grade Level
     #    - Primary Email
     #    - Secondary Email
-
+students = [{
+    "CPSID": ,
+    "Combo,Name": "",
+    "LName": "",
+    "FName": "",
+    "MName": "",
+    "HR": "",
+    "GL": ,
+    "Email": ["" ""]
+}
 # 2. Combine the First and Last name into this format:
     #    "Last, First"  
 
@@ -55,6 +64,4 @@
 # 7. If the CPS ID already exists in the system:
         #    - Do NOT add the student
         #    - Display an error message saying the CPS ID is already taken
-
-
 
