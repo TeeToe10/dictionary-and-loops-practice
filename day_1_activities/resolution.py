@@ -36,13 +36,13 @@ def search_student(full_name):
     """
     # first step: 
     # create a loop to loop throughthe students
-    
-    # then compare the name field to the search term
-       
+    for student in students:
+        # then compare the name field to the search term
+        if student["name"].lower() == full_name.lower():
             # if found, return the dictionary
-            
+            return student
     # if not found, return None
-    
+    return None
 
 
 # -----------------------------------------
@@ -52,17 +52,19 @@ def add_student():
     print("\n--- Add a New Student ---")
 
     # Get user input for all required fields
-    
+
+    cps_id = input("CPS ID: ")
 
     # Check for duplicate CPS ID
     # Loop through existing students to see if cps_id already exists
-    
+
+    for student in students:
         # Check if the current student's cps_id matches the new cps_id
-        
-            # If a match is found, print an error and exit the function
-            
+        if student["cps_id"] == cps_id:
+             # If a match is found, print an error and exit the function
+            print("Error: A student with this CPS Id akready exists.")
             # Exit the function early to prevent adding a duplicate
-            
+            return
 
     # Continue gathering the rest of the information
     # Prompt the user for each piece of information
@@ -75,7 +77,7 @@ def add_student():
     secondary = input("Secondary Email: ")
 
     # Format name as "Last, First"
-    
+    full_name = f"{last}, {first}"
 
     # Build the dictionary
     # Create a new dictionary with all the collected information from the user inputs
@@ -90,11 +92,13 @@ def add_student():
     }
 
     # Add to the list
-    
+    students.append(new_student)
 
     # Confirmation
-   
-
+    print(f"\nStudent {full_name} added successfully.")
+    print(new_student)
+    print("Total students in the system:", len(students))
+    print("new record added:", new_student)
 
 # -----------------------------------------
 # MAIN PROGRAM LOOP
@@ -113,24 +117,29 @@ while True:
     # Handle user choice
     if choice == "1":
         # Search for a student
-        
+        choice_name = input("Enter the student's full name (Last, First): ")
         # Call the search function and store the result
-        
-        
+        result = search_student(choice_name)
 
         # Display results
         if result:
-           
+            print("\nStudent found:")
+            print(f"CPS ID: {result['cps_id']}")
+            print(f"Name: {result['name']}")
+            print(f"Middle Name: {result['middle_name']}")
+            print(f"Homeroom: {result['homeroom']}")
+            print(f"Grade: {result['grade']}")
+            print(f"Primary Email: {result['primary_email']}")
+            print(f"Secondary Email: {result['secondary_email']}")
         else:
             # Inform the user if the student was not found
             print("\nStudent not found.")
 
     elif choice == "2":
-        
+        add_student()
 
     elif choice == "3":
         print("Goodbye!")
         break
 
-    else:
-        print("Invalid choice. Try again.")
+
